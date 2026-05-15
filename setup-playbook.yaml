@@ -1,23 +1,23 @@
 ---
 - name: Basic System Setup
-  hosts: all
+  hosts: web
   become: true
   tasks:
     - name: Update all security-related packages
       ansible.builtin.package:
         name: '*'
-        state: "{{ package_state }}"
-        security: "{{ security_only }}"
+        state: latest
+        security: true
    
     - name: Create a new user
       ansible.builtin.user:
-        name: "{{ item }}"
+        name: roger
         state: present
         create_home: true
-      loop:
-        - alice
-        - bob
-        - carol
+      # loop:
+      #   - alice
+      #   - bob
+      #   - carol
 
   #   - name: Install Apache on web server
   #     ansible.builtin.package: 
